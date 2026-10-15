@@ -4,8 +4,8 @@
 //
 // Chain (classical signal processing, ported from voclair_offline.py, 15 October 2026):
 //   1. late-reverberation spectral subtraction (Lebart 2001, Habets 2007)   -> removes the reverb tail
-//   2. OM-LSA noise suppression with speech-presence noise tracking (Cohen 2003; Gerkmann and Hendriks 2012)
-//      -> removes background noise, keeps adapting through the clip (log-MMSE, Ephraim and Malah 1985, via denoiser: "logmmse")
+//   2. log-spectral amplitude MMSE noise suppression (Ephraim and Malah 1985) -> removes background noise
+//      (OM-LSA with noise tracking, Cohen 2003, available via denoiser: "omlsa")
 //   3. 80 Hz high-pass (zero phase) and level normalisation                   -> removes rumble, evens loudness
 //
 // Usage:
@@ -16,7 +16,7 @@
 //   rt60          reverberation time of the room in seconds (default 0.8, safe for unknown rooms)
 //   dereverb      true/false (default true)
 //   denoise       true/false (default true)
-//   denoiser      "omlsa" (default) or "logmmse"
+//   denoiser      "logmmse" (default) or "omlsa"
 //   highpassHz    default 80, 0 switches it off
 //   targetRmsDb   output level in dB relative to full scale (default -23)
 //   onProgress    function(fraction 0..1), called between stages
@@ -272,13 +272,13 @@ function normalise(x, targetRmsDb) {
 
 // ------------------------------------------------------------------ public entry point
 export function voclairClean(samples, sampleRate, opts = {}) {
-  const { rt60 = 0.8, dereverb = true, denoise = true, denoiser = "omlsa", highpassHz = 80, targetRmsDb = -23, onProgress } = opts;
+  const { rt60 = 0.8, dereverb = true, denoise = true, denoiser = "logmmse", highpassHz = 80, targetRmsDb = -23, onProgress } = opts;
   let peak = 0; for (const v of samples) peak = Math.max(peak, Math.abs(v));
   let x = Float64Array.from(samples, (v) => (v / (peak || 1)) * 0.5);
   onProgress?.(0.05);
   if (dereverb) x = lateReverbSubtraction(x, sampleRate, { rt60 });
   onProgress?.(0.45);
-  if (denoise) x = denoiser === "logmmse" ? logMmse(x, sampleRate) : omlsa(x, sampleRate, opts.omlsa);
+  if (denoise) x = denoiser === "omlsa" ? omlsa(x, sampleRate, opts.omlsa) : logMmse(x, sampleRate);
   onProgress?.(0.85);
   if (highpassHz) x = highpassZeroPhase(x, sampleRate, highpassHz);
   const y = normalise(x, targetRmsDb);
