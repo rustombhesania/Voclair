@@ -56,7 +56,7 @@
 
   /* "Hear the difference": bring the hero clip into view and play it */
   document.addEventListener("click", function (e) {
-    var t = e.target.closest("#hero-listen, [data-listen]");
+    var t = e.target.closest("[data-listen]");
     if (!t || !hero) return;
     e.preventDefault();
     var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

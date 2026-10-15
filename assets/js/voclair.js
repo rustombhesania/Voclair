@@ -18,12 +18,13 @@
 
   /* ---------- Theme: follows the system; a manual choice is remembered ---------- */
   var KEY = "voclair-theme";
+  function consented() { try { return localStorage.getItem("voclair-consent") === "accepted"; } catch (e) { return false; } }
   var theme = {
     get: function () { return document.documentElement.getAttribute("data-theme") || "light"; },
     set: function (mode, remember) {
       document.documentElement.setAttribute("data-theme", mode);
-      if (remember) { try { localStorage.setItem(KEY, mode); } catch (e) {} }
-      document.querySelectorAll(".vc-theme").forEach(function (b) {
+      if (remember && consented()) { try { localStorage.setItem(KEY, mode); } catch (e) {} }   /* only with consent (see consent.js) */
+      document.querySelectorAll(".vc-theme:not(.vc-menu-btn)").forEach(function (b) {
         b.setAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
       });
       redrawers.forEach(function (f) { f(); });
@@ -116,7 +117,7 @@
     function loop() { render(); if (playing) raf = requestAnimationFrame(loop); }
     function setMuted() { if (a) a.muted = state !== "before"; if (b) b.muted = state !== "after"; }
     function make(src) {
-      var el = new Audio(); el.loop = true; el.preload = "metadata"; el.src = src;
+      var el = new Audio(); el.loop = false; el.preload = "auto"; el.src = src;   /* plays once, then stops (looping sounded like a beat) */
       el.addEventListener("loadedmetadata", render);
       return el;
     }
@@ -125,7 +126,12 @@
       setSources: function (beforeSrc, afterSrc) {
         api.pause(); if (a) a.pause(); if (b) b.pause();
         a = beforeSrc ? make(beforeSrc) : null; b = afterSrc ? make(afterSrc) : null;
-        if (a && b) a.addEventListener("timeupdate", function () { if (Math.abs(a.currentTime - b.currentTime) > 0.08) b.currentTime = a.currentTime; });
+        if (a && b) {
+          /* Only correct real drift; frequent small seeks made After stutter in some browsers. */
+          a.addEventListener("timeupdate", function () { if (!b.seeking && Math.abs(a.currentTime - b.currentTime) > 0.25) b.currentTime = a.currentTime; });
+          /* At the end: stop and rewind, ready to play again. */
+          a.addEventListener("ended", function () { api.pause(); pos = 0; a.currentTime = 0; b.currentTime = 0; b.pause(); render(); });
+        }
         pos = 0; render();
       },
       /* {before: number[], after: number[]} from Voclair.computePeaks */
@@ -234,7 +240,7 @@
     if (window.ResizeObserver) new ResizeObserver(function () { size = fitCanvas(canvas, ctx); }).observe(canvas);
     function draw(time) {
       var w = size.w, h = size.h; ctx.clearRect(0, 0, w, h);
-      var t = reduced() || opts.still ? 1 : time * 0.0003, center = h / 2, spacing = w < 600 ? 2.6 : 3;
+      var t = reduced() || opts.still ? 1 : time * 0.0011, center = h / 2, spacing = w < 600 ? 2.6 : 3;
       var bright = css(canvas, "--wave-clean"), dark = css(canvas, "--wave-clean-deep");
       var vp = opts.print || window.VOCLAIR_VOICE_PRINT;
       if (vp && vp.u && vp.u.length) {                                /* the Voclair voice print, traced from the brand PNG */
@@ -243,8 +249,9 @@
           var f = (px - pad) / span * (N - 1), i0 = Math.floor(f), i1 = Math.min(N - 1, i0 + 1), k = f - i0;
           var up = vp.u[i0] * (1 - k) + vp.u[i1] * k, dn = vp.d[i0] * (1 - k) + vp.d[i1] * k;
           var shim = Math.abs(Math.sin(px * 12.9898 + Math.sin(t + px * 0.03) * 4.2));
-          var breathe = 0.9 + 0.1 * Math.sin((px / w) * 18 - t * 1.6);
-          var s = h * 0.45 * breathe;
+          var breathe = 0.72 + 0.28 * Math.sin((px / w) * 18 - t * 2.4);          /* ripple travelling along the wave */
+          var pulse = 0.8 + 0.2 * Math.abs(Math.sin(t * 2.2));                   /* whole wave swells like syllables */
+          var s = h * 0.45 * breathe * pulse;
           ctx.globalAlpha = 0.45 + shim * 0.5; ctx.strokeStyle = px % 9 < 3 ? dark : bright; ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(px, center - Math.max(0.5, up * s)); ctx.lineTo(px, center + Math.max(0.5, dn * s)); ctx.stroke();
         }
@@ -318,7 +325,7 @@
       }, { rootMargin: "-40% 0px -55% 0px" });
       links.forEach(function (l) { var s = document.querySelector(l.getAttribute("href")); if (s) io.observe(s); });
     }
-    root.querySelectorAll(".vc-theme").forEach(function (b) { b.addEventListener("click", theme.toggle); });
+    root.querySelectorAll(".vc-theme:not(.vc-menu-btn)").forEach(function (b) { b.addEventListener("click", theme.toggle); });   /* the menu button shares the look, not the job */
   }
 
   /* ---------- Auto-init: [data-vc] hooks and [data-icon] placeholders ---------- */
