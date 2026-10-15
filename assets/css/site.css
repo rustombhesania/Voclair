@@ -224,3 +224,56 @@ html.is-loading body { overflow: hidden; }
 @media (prefers-reduced-motion: no-preference) { .vc-consent { animation: vc-consent-in 300ms var(--ease-out); } }
 @keyframes vc-consent-in { from { opacity: 0; translate: 0 12px; } }
 .vc-footer-base a[data-consent-open] { cursor: pointer; }
+
+/* Legal pages: space between paragraphs */
+.plain p + p { margin-top: var(--space-3); }
+.plain p strong { color: var(--ink); }
+
+/* Glass top bar: see-through, frosted, with a soft light edge */
+.vc-topbar {
+  background: color-mix(in oklch, var(--surface) 62%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  backdrop-filter: blur(20px) saturate(170%);
+  border-bottom: 1px solid color-mix(in oklch, var(--line) 70%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklch, white 45%, transparent);
+}
+[data-theme="dark"] .vc-topbar { background: color-mix(in oklch, var(--surface) 52%, transparent); box-shadow: inset 0 1px 0 color-mix(in oklch, white 8%, transparent); }
+.vc-topbar[data-scrolled] { box-shadow: inset 0 1px 0 color-mix(in oklch, white 45%, transparent), 0 8px 24px -16px rgba(17, 21, 19, 0.35); }
+[data-theme="dark"] .vc-topbar[data-scrolled] { box-shadow: inset 0 1px 0 color-mix(in oklch, white 8%, transparent), 0 8px 24px -16px rgba(0, 0, 0, 0.8); }
+/* The menu sits inside the frosted bar, where a second blur cannot reach the page, so it stays solid for legibility */
+.vc-menu { background: var(--surface); }
+/* Fallback where frosting is not supported: keep the bar readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .vc-topbar, .vc-menu { background: var(--surface); }
+}
+
+/* "or drag it here" only where dragging files is realistic: hidden on tablets, phones and touch screens */
+@media (max-width: 1024px), (hover: none) and (pointer: coarse) { .demo-opt-hint { display: none; } }
+
+/* Footer "Product" links: 2 columns × 3 rows, filled top to bottom */
+.vc-footer ul.footer-cols { grid-template-columns: repeat(2, max-content); grid-template-rows: repeat(3, auto); grid-auto-flow: column; column-gap: var(--space-8); }
+
+/* Hero caption on one line: the text shrinks with the player (up to 14px) so it fits;
+   on phones, where one line would be too small to read, it wraps into two even lines at 12px. */
+.hero-caption { font-size: clamp(12px, 2.3cqi, 14px); text-wrap: balance; }
+
+/* Tighter rhythm between sections (was 96px top and bottom on desktop, 64px on phones) */
+.vc-section { padding-block: var(--space-12); }
+@media (min-width: 768px) { .vc-section { padding-block: var(--space-16); } }
+.hero { padding-block: var(--space-8) var(--space-12); }
+@media (min-width: 1024px) { .hero { padding-block: var(--space-16) var(--space-16); } }
+.section-head { margin-bottom: var(--space-8); }
+.section-close { margin-top: var(--space-8); }
+.benefits { margin-top: var(--space-12); }
+.next-close { margin-top: var(--space-8); }
+
+/* Record card: waveform the same size and tinted panel as the upload card's */
+#demo-record .demo-opt-wave { height: 96px; flex: none; background: var(--surface-sunken); }
+
+/* Demo cards: identical padding, spacing, icon and type in both (upload keeps only its lime icon and dashed drop border) */
+.demo-opt, .demo-opt.demo-opt-drop { padding: var(--space-6); gap: var(--space-4); }
+.demo-opt .demo-opt-icon, .demo-opt-drop .demo-opt-icon { width: 48px; height: 48px; }
+.demo-opt .demo-opt-icon .vc-icon, .demo-opt-drop .demo-opt-icon .vc-icon { width: 24px; height: 24px; }
+.demo-opt .demo-opt-title, .demo-opt-drop .demo-opt-title { font: 700 20px/1.3 var(--font-sans); }
+.demo-opt .demo-opt-head .demo-opt-note, .demo-opt-drop .demo-opt-head .demo-opt-note { font-size: 13px; line-height: 1.45; }
+.demo-opt .demo-opt-wave, .demo-opt-drop .demo-opt-wave { height: 96px; min-height: 0; flex: none; }
