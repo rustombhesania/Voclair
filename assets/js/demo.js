@@ -53,7 +53,7 @@
         .then(function (b) { return { blob: b, stub: false }; });
     }
     /* Default: the in-browser engine (assets/js/engine/); nothing is uploaded.
-       Testing switches in the page address: ?dereverb=0, ?denoise=0, ?rt60=0.4, ?denoiser=logmmse */
+       Testing switches in the page address: ?dereverb=0, ?denoise=0, ?rt60=0.4, ?denoiser=omlsa */
     var E = window.VoclairEngine;
     if (decoded && E && E.supported()) {
       var q = new URLSearchParams(location.search);
@@ -61,7 +61,7 @@
         rt60: Number(q.get("rt60")) || C.rt60 || 0.8,
         dereverb: q.get("dereverb") !== "0",
         denoise: q.get("denoise") !== "0",
-        denoiser: q.get("denoiser") === "logmmse" ? "logmmse" : "omlsa"
+        denoiser: q.get("denoiser") === "omlsa" ? "omlsa" : "logmmse"
       }).then(function (b) { return { blob: b, stub: false }; });
     }
     return wait(1200).then(function () { return { blob: blob, stub: true }; });
