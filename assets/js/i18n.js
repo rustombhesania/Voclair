@@ -29,15 +29,16 @@
 
     /* Hero */
     "Your voice. Your words. Always.": "Ihre Stimme. Ihre Worte. Immer.",
-    "Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues. It runs on your own device, and nothing is stored.":
-      "Voclair entfernt Echo, Hall und Störgeräusche aus dem Mikrofonsignal, während gesprochen wird – in Hörsälen und auf Veranstaltungen. Es läuft auf Ihrem eigenen Gerät, und nichts wird gespeichert.",
+    "Voclair removes echo, reverb and noise from your microphone as you speak. It runs locally on your device, and nothing is stored by us.":
+      "Voclair entfernt Echo, Hall und Störgeräusche aus Ihrem Mikrofon, während Sie sprechen. Es läuft lokal auf Ihrem Gerät, und wir speichern nichts.",
     "Before": "Vorher",
     "After": "Nachher",
     "Flip the switch while it plays. Drag the wave to jump around.": "Während der Wiedergabe umschalten. An der Welle ziehen, um zu springen.",
     "The haze around the voice is echo, reverb and noise.": "Der Schleier um die Stimme ist Echo, Hall und Rauschen.",
     "Recorded live at Cyber Valley.": "Live im Cyber Valley aufgenommen.",
+    "The haze around the voice is echo, reverb and noise. Recorded live at Cyber Valley.": "Der Schleier um die Stimme ist Echo, Hall und Rauschen. Live im Cyber Valley aufgenommen.",
     "Hear the difference": "Den Unterschied hören",
-    "Try demo": "Demo testen",
+    "Try the demo": "Demo testen",
     "Made for lecture halls, conference venues and live events.": "Für Hörsäle, Konferenzräume und Live-Veranstaltungen.",
 
     /* Problem */
@@ -64,6 +65,7 @@
     "One tool, not a chain of fixes.": "Ein Werkzeug statt einer Kette von Notlösungen.",
     "Private by design": "Datenschutz von Anfang an",
     "It runs on your own computer, and nothing is stored.": "Es läuft auf Ihrem eigenen Computer, und nichts wird gespeichert.",
+    "It runs locally on your device, and nothing is stored by us.": "Es läuft lokal auf Ihrem Gerät, und wir speichern nichts.",
 
     /* Demo */
     "Hear it with your own audio.": "Hören Sie es mit Ihrer eigenen Aufnahme.",
@@ -114,6 +116,9 @@
     "Live captions and summaries": "Live-Untertitel und Zusammenfassungen",
     "Captions on screen as people speak, plus a summary afterwards.": "Untertitel auf dem Bildschirm, während gesprochen wird, und danach eine Zusammenfassung.",
     "Better transcripts": "Bessere Transkripte",
+    "Empower your AI": "Stärken Sie Ihre KI",
+    "The Full Package": "Das Komplettpaket",
+    "Voice AI that just works.": "Sprach-KI, die einfach funktioniert.",
     "Clearer audio for speech recognition and voice assistants.": "Klarerer Ton für Spracherkennung und Sprachassistenten.",
     "Developer access": "Zugang für Entwickler",
     "Connect Voclair to your own software.": "Voclair mit der eigenen Software verbinden.",

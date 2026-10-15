@@ -1,11 +1,12 @@
 /* Voclair site settings. Fill these in before launch; null hides the related line or uses a preview stand-in. */
 window.VOCLAIR_CONFIG = {
   /* Hero clip: the same 10–15 s from the Cyber Valley sample, original and cleaned (real-time version), equal length. */
-  heroBefore: "assets/audio/hero-before.mp3",
-  heroAfter: "assets/audio/hero-after.mp3",
+  /* File names carry part of the file's fingerprint, so browsers never play an old cached clip. New clips → new names. */
+  heroBefore: "assets/audio/hero-before.a2707b5d.mp3",
+  heroAfter: "assets/audio/hero-after.c5a2edc3.mp3",
 
   /* "Use a sample" in the demo: an original recording to clean. */
-  sample: "assets/audio/hero-before.mp3",
+  sample: "assets/audio/hero-before.a2707b5d.mp3",
 
   /* Demo processing. null = preview stub (After plays the original and a notice says so).
      Set to a URL that accepts the audio file as the POST body and returns the cleaned audio. */
