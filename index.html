@@ -3,7 +3,7 @@
 <script>document.body.classList.add("vc-page");</script>
 
 <meta name="description" content="Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues. It runs on your own device, and nothing is stored.">
-<meta property="og:title" content="Voclair: every seat hears every word">
+<meta property="og:title" content="Voclair: Your voice. Your words. Always.">
 <meta property="og:description" content="Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#f8f8f5" media="(prefers-color-scheme: light)">
@@ -26,6 +26,8 @@
 <script src="assets/js/engine/voclair-engine-adapter.js" defer></script>
 <script src="assets/js/voice-print.js" defer></script>
 <script src="assets/js/voclair.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/consent.js" defer></script>
 <script src="assets/js/site.js" defer></script>
 <noscript><style>.vc-preloader { display: none; } html.is-loading body { overflow: auto; }</style></noscript>
 
@@ -35,7 +37,7 @@
   <div class="vc-preloader-wave"><canvas class="vc-wave" aria-hidden="true"></canvas></div>
   <div class="vc-preloader-id">
     <div class="vc-logo"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></div>
-    <p class="tagline">A moment of clarity.</p>
+    <p class="tagline">Your voice. Your words. Always.</p>
     <div class="vc-loader"><canvas aria-hidden="true"></canvas><span class="vc-loader-pct">0%</span></div>
   </div>
 </div>
@@ -47,6 +49,7 @@
   <div class="vc-topbar-inner">
     <a class="vc-logo" href="#top" aria-label="Voclair, back to top"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></a>
     <nav class="vc-nav" aria-label="Main"><a href="#how">How it works</a><a href="#demo">Demo</a><a href="#next">Coming next</a><a href="#faq">FAQ</a></nav>
+    <button class="vc-lang" type="button" aria-label="Language"><span data-l="en">EN</span><span class="vc-lang-sep" aria-hidden="true">/</span><span data-l="de">DE</span></button>
     <button class="vc-theme" type="button" aria-label="Switch theme"><span data-icon="moon" class="vc-i-moon"></span><span data-icon="sun" class="vc-i-sun"></span></button>
     <a class="vc-btn vc-btn-secondary vc-btn-sm" href="#quote" data-need="">Get a quote</a>
     <button class="vc-theme vc-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span data-icon="menu"></span></button>
@@ -54,6 +57,7 @@
   <div class="vc-menu" id="mobile-menu" hidden>
     <nav class="vc-nav" aria-label="Main, mobile"><a href="#how">How it works</a><a href="#demo">Demo</a><a href="#next">Coming next</a><a href="#faq">FAQ</a></nav>
     <div class="vc-menu-foot"><span class="body-sm">Appearance</span><button class="vc-theme" type="button" aria-label="Switch theme"><span data-icon="moon" class="vc-i-moon"></span><span data-icon="sun" class="vc-i-sun"></span></button></div>
+    <div class="vc-menu-foot"><span class="body-sm">Language</span><button class="vc-lang" type="button" aria-label="Language"><span data-l="en">EN</span><span class="vc-lang-sep" aria-hidden="true">/</span><span data-l="de">DE</span></button></div>
   </div>
 </header>
 
@@ -84,7 +88,7 @@
       </div>
       <div class="hero-actions">
         <div class="vc-btn-row">
-          <a class="vc-btn vc-btn-primary" href="#hero-player" id="hero-listen">Hear the difference</a>
+          <a class="vc-btn vc-btn-primary" href="#demo">Try demo</a>
           <a class="vc-btn vc-btn-secondary" href="#quote" data-need="">Get a quote</a>
         </div>
         <p class="body-sm">Made for lecture halls, conference venues and live events.</p>
@@ -129,40 +133,32 @@
     <div class="vc-container">
       <div class="section-head">
         <h2 class="heading" id="demo-title">Hear it with your own audio.</h2>
-        <p class="lead">Upload a recording of someone speaking, or record yourself, and hear the difference.</p>
-        <p class="body-sm">Your audio is cleaned in this browser tab. Nothing is uploaded or stored.</p>
+        <p class="lead">Upload or record someone speaking and hear the difference.</p>
+        <p class="body-sm">Up to 5 MB or 3 minutes; nothing is stored.</p>
       </div>
 
       <div class="demo" id="demo-app" data-stage="idle">
         <div class="demo-options">
-          <!-- Upload: cleaned in the browser by assets/js/engine/ (see config.js). -->
+          <!-- Primary path: a large drop zone -->
           <label class="demo-opt demo-opt-drop" id="demo-drop" for="demo-file">
-            <input class="vc-sr" type="file" id="demo-file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.oga,.opus,.flac,.webm">
-            <span class="demo-opt-icon demo-icon-upload"><span data-icon="upload"></span></span>
-            <span class="demo-opt-text">
-              <span class="demo-opt-title">Upload a file</span>
-              <span class="demo-opt-note">Drop in a recording of someone speaking, or click to choose one. MP3, WAV, M4A, OGG or FLAC, up to 5&nbsp;MB and 3 minutes. It is cleaned on your device and never uploaded.</span>
-            </span>
+            <span class="demo-opt-head"><span class="demo-opt-icon demo-icon-upload"><span data-icon="upload"></span></span><span class="demo-opt-text"><span class="demo-opt-title">Upload a file</span><span class="demo-opt-note">Drop a recording here, or choose one from your device. MP3, WAV, M4A, OGG or FLAC, up to 5&nbsp;MB.</span></span></span>
             <span class="demo-opt-wave" aria-hidden="true"><canvas data-vc="wave" data-state="before" data-seed="2.1"></canvas><canvas class="demo-wave-clean" data-vc="wave" data-state="after" data-seed="2.1"></canvas></span>
+            <span class="demo-opt-foot"><span class="vc-btn vc-btn-primary demo-opt-btn">Choose a file</span><span class="demo-opt-hint">or drag it here</span></span>
             <span class="demo-opt-live"></span>
+            <input type="file" id="demo-file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac,.webm" class="vc-sr">
           </label>
 
-          <!-- Record: 10 s from the microphone, then cleaned the same way as an upload (demo.js). -->
           <button class="demo-opt" type="button" id="demo-record">
-            <span class="demo-opt-icon demo-icon-mic"><span data-icon="mic"></span></span>
-            <span class="demo-opt-text">
-              <span class="demo-opt-title">Record yourself</span>
-              <span class="demo-opt-note">Speak for up to 10 seconds. Stay quiet for the first half second so Voclair can hear the room. The browser asks for the microphone only when you click.</span>
-            </span>
+            <span class="demo-opt-head"><span class="demo-opt-icon demo-icon-mic"><span data-icon="mic"></span></span><span class="demo-opt-text"><span class="demo-opt-title">Record 10 seconds</span><span class="demo-opt-note">Works best in a room with echo or background noise.</span></span></span>
+            <span class="demo-opt-wave" aria-hidden="true"><canvas data-vc="wave" data-state="before" data-seed="3.7"></canvas><canvas class="demo-wave-clean" data-vc="wave" data-state="after" data-seed="3.7"></canvas></span>
             <span class="demo-recorder" id="demo-recording" hidden>
+              <span class="vc-status" data-live>Recording</span>
               <span class="demo-count" id="demo-count">0:10</span>
-              <span class="demo-level" id="demo-level" aria-hidden="true"><i></i></span>
-              <span class="vc-status" data-live>Recording. Click again to stop early.</span>
+              <span class="demo-level" aria-hidden="true"><i id="demo-level"></i></span>
             </span>
-            <span class="demo-opt-action"><span class="demo-action-label">Start recording</span><span data-icon="arrow-right" class="demo-arrow"></span><span data-icon="square" class="demo-stop-icon"></span></span>
+            <span class="demo-opt-action" id="demo-record-action"><span data-icon="square" class="demo-stop-icon"></span><span class="demo-action-label">Start recording</span><span data-icon="arrow-right" class="demo-arrow"></span></span>
             <span class="demo-opt-live"></span>
           </button>
-
         </div>
 
         <!-- Moved by demo.js into the card that started the work -->
@@ -243,17 +239,17 @@
       </div>
       <div class="vc-cards team-grid">
         <article class="vc-team">
-          <div class="vc-team-photo" role="img" aria-label="Photo of Rustom">R</div>
+          <img class="vc-team-photo" src="assets/img/team/rustom.jpg" alt="Rustom" width="640" height="800" loading="lazy" decoding="async">
           <h3 class="subheading">Rustom</h3>
           <ul><li>Speech enhancement and test-time adaptation research, University of Stuttgart</li><li>Speech recognition (ASR) models built from scratch</li><li>Live mixing on digital desks</li></ul>
         </article>
         <article class="vc-team">
-          <div class="vc-team-photo" role="img" aria-label="Photo of Deepam">D</div>
+          <img class="vc-team-photo" src="assets/img/team/deepam.jpg" alt="Deepam" width="640" height="800" loading="lazy" decoding="async">
           <h3 class="subheading">Deepam</h3>
           <ul><li>UI/UX, branding and strategy</li></ul>
         </article>
         <article class="vc-team">
-          <div class="vc-team-photo" role="img" aria-label="Photo of Mehryar">M</div>
+          <img class="vc-team-photo" src="assets/img/team/mehryar.jpg" alt="Mehryar" width="640" height="800" loading="lazy" decoding="async">
           <h3 class="subheading">Mehryar</h3>
           <ul><li>Natural language processing</li><li>Automatic speech recognition</li><li>Local, private AI deployment</li></ul>
         </article>
@@ -315,7 +311,7 @@
           <p class="vc-error" id="q-send-err" role="alert" hidden><span data-icon="circle-alert"></span><span>The message could not be sent. Check the connection and try again.</span></p>
           <div class="quote-submit">
             <button class="vc-btn vc-btn-primary" type="submit" id="q-send">Send</button>
-            <p class="body-sm">Voclair stores your email and message only to reply to you. Read the <a class="vc-link" href="privacy.html">privacy policy</a>.</p>
+            <p class="body-sm">Read the <a class="vc-link" href="privacy.html">privacy policy</a>.</p>
           </div>
         </form>
       </div>
@@ -328,13 +324,13 @@
     <div class="vc-footer-grid">
       <div>
         <a class="vc-logo" href="#top"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></a>
-        <p class="footer-line">Voclair: every seat hears every word.</p>
+        <p class="footer-line">Your voice. Your words. Always.</p>
         <p>Cyber Valley AI Incubator, Batch 9</p>
       </div>
       <div><h2>Product</h2><ul><li><a href="#how">How it works</a></li><li><a href="#demo">Demo</a></li><li><a href="#next">Coming next</a></li><li><a href="#faq">FAQ</a></li><li><a href="#quote" data-need="">Get a quote</a></li></ul></div>
       <div><h2>Contact</h2><ul id="footer-contact"><li><a href="#quote" data-need="">Request a quote</a></li></ul></div>
     </div>
-    <div class="vc-footer-base"><span>© 2026 Voclair</span><span><a href="impressum.html">Impressum</a> · <a href="privacy.html">Privacy policy</a></span></div>
+    <div class="vc-footer-base"><span>© 2026 Voclair</span><span><a href="impressum.html">Impressum</a> · <a href="privacy.html">Privacy policy</a> · <a href="#" data-consent-open>Cookie settings</a></span></div>
   </div>
 </footer>
 

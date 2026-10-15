@@ -18,7 +18,6 @@
   var errBox = $("#demo-error"), errText = $("#demo-error-text");
   var results = $("#demo-results"), stub = $("#demo-stub"), download = $("#demo-download");
   var details = $("#demo-details"), transcript = $("#demo-transcript"), tBody = $("#transcript-body"), tStatus = $("#transcript-status");
-  if (!fileInput) return;   /* upload is "coming soon": nothing to wire up yet */
   var player = V.mountPlayer($("#demo-player"));
   var current = null, ctx = null, urls = [];
 
@@ -48,21 +47,23 @@
      Order: cleanEndpoint (server) if set, else window.VoclairEngine (in the browser), else preview stub.
      ===================================================================== */
   function cleanAudio(blob, decoded) {
-    /* 1. A server endpoint, if one is configured (sends the audio off the device). */
     if (C.cleanEndpoint) {
       return fetch(C.cleanEndpoint, { method: "POST", headers: { "Content-Type": blob.type || "application/octet-stream" }, body: blob })
         .then(function (r) { if (!r.ok) throw new Error("clean-failed"); return r.blob(); })
         .then(function (b) { return { blob: b, stub: false }; });
     }
-    /* 2. Default: the in-browser engine (assets/js/engine/), nothing is uploaded. */
+    /* Default: the in-browser engine (assets/js/engine/); nothing is uploaded.
+       Testing switches in the page address: ?dereverb=0, ?denoise=0, ?rt60=0.4, ?denoiser=logmmse */
     var E = window.VoclairEngine;
     if (decoded && E && E.supported()) {
+      var q = new URLSearchParams(location.search);
       return E.clean(decoded, {
-        rt60: C.rt60 || 0.8,
-        onProgress: function (p) { stageText.textContent = "Cleaning on your device… " + Math.round(p * 100) + "%"; }
+        rt60: Number(q.get("rt60")) || C.rt60 || 0.8,
+        dereverb: q.get("dereverb") !== "0",
+        denoise: q.get("denoise") !== "0",
+        denoiser: q.get("denoiser") === "logmmse" ? "logmmse" : "omlsa"
       }).then(function (b) { return { blob: b, stub: false }; });
     }
-    /* 3. Fallback preview: plays the original and shows the "Preview build" notice. */
     return wait(1200).then(function () { return { blob: blob, stub: true }; });
   }
   function transcribe(blob) {
@@ -180,7 +181,7 @@
     if (rec && rec.state === "recording") { rec.stop(); return; }           /* second click stops early */
     clearError();
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) {
-      return showError("This browser cannot record here. Upload a file or use the sample instead.");
+      return showError("This browser cannot record here. Upload a file instead.");
     }
     navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } }).then(function (stream) {
       var chunks = [], left = REC_SECONDS;
@@ -202,7 +203,7 @@
         if (left <= 0 && rec.state === "recording") rec.stop();
       }, 1000);
     }).catch(function () {
-      showError("Microphone access was not granted. Upload a file or use the sample instead.");
+      showError("Microphone access was not granted. Upload a file instead.");
     });
   });
 

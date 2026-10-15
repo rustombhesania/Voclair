@@ -158,12 +158,12 @@
 .vc-preloader-id { position: relative; z-index: 1; text-align: center; translate: 0 6px; }
 .vc-preloader-id .vc-logo { --h: 110px; gap: 36px; font-size: var(--fs-wordmark); line-height: 1.1; }
 .vc-preloader-id .vc-mark { --h: 110px; }
-.vc-preloader-id .tagline { margin-top: 30px; text-shadow: 0 0 6px var(--surface), 0 0 14px var(--surface); }
+.vc-preloader-id .tagline { margin-top: 30px; padding-inline: var(--space-4); font-size: clamp(16px, 4.6vw, 22px); line-height: 1.35; text-wrap: balance; text-shadow: 0 0 6px var(--surface), 0 0 14px var(--surface); }
 .vc-preloader .vc-loader { margin-top: 34px; }
 @media (max-width: 640px) {
   .vc-preloader-id .vc-logo { gap: 14px; }
   .vc-preloader-id .vc-mark { --h: 40px; }
-  .vc-preloader-id .tagline { margin-top: 16px; font-size: 11px; }
+  .vc-preloader-id .tagline { margin-top: 16px; }
   .vc-preloader .vc-loader canvas { width: 210px; height: 20px; }
   .vc-preloader-wave { height: 280px; width: 150%; left: -25%; }
 }
@@ -182,6 +182,7 @@
 .vc-step-num .vc-icon { width: 24px; height: 24px; }
 .vc-step-k { font: 400 13px/1.4 var(--font-mono); color: var(--ink-muted); }
 .vc-step:nth-child(2) .vc-step-num { background: var(--lime); border-color: var(--lime); color: var(--on-lime); }
+.vc-step-num .vc-mark { color: inherit; }   /* the mark takes the tile's ink, so it stays dark on lime in both themes */
 .vc-step h3 { align-self: end; }
 .vc-step p { color: var(--ink-muted); grid-column: 2; }
 .vc-step:not(:last-child)::after { content: ""; position: absolute; left: 24px; top: 48px; bottom: calc(-1 * var(--space-6)); border-left: 1px dashed var(--line-strong); }

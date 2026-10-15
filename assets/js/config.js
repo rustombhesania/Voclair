@@ -7,11 +7,11 @@ window.VOCLAIR_CONFIG = {
   /* "Use a sample" in the demo: an original recording to clean. */
   sample: "assets/audio/hero-before.mp3",
 
-  /* Demo processing. null = clean in the visitor's browser with assets/js/engine/ (nothing is uploaded).
-     Only set a URL if cleaning moves to a server: it must accept the audio as the POST body and return the cleaned audio. */
-  cleanEndpoint: null,
+  /* Demo processing. null = preview stub (After plays the original and a notice says so).
+     Set to a URL that accepts the audio file as the POST body and returns the cleaned audio. */
+  cleanEndpoint: null,   /* leave null: cleaning runs in the browser (assets/js/engine/) */
 
-  /* Room reverberation time in seconds passed to the engine: 0.4 small room, 0.8 medium (default), 1.5 large hall. */
+  /* Room reverberation time in seconds for the engine: 0.4 small room, 0.8 medium (default), 1.5 large hall. */
   rt60: 0.8,
 
   /* Transcript preview. Each takes the audio as the POST body and returns JSON:
@@ -28,6 +28,6 @@ window.VOCLAIR_CONFIG = {
   contactEmail: null,      /* e.g. "hello@voclair.example" → shown in the footer */
   linkedin: null,          /* company LinkedIn URL → shown in the footer */
 
-  /* Preloader: shown on every visit; fills over this many ms, holds at 97% until the page has loaded. */
-  preloaderMs: 5120
+  /* Preloader: shown on every visit; fills over this many ms (1700 = about 1.7 s), holds at 97% until the page has loaded. */
+  preloaderMs: 1700
 };
