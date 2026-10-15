@@ -1,0 +1,341 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Voclair (Copy)</title>
+<script>document.body.classList.add("vc-page");</script>
+
+<meta name="description" content="Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues. It runs on your own device, and nothing is stored.">
+<meta property="og:title" content="Voclair: every seat hears every word">
+<meta property="og:description" content="Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f8f8f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c110e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/voclair-app-icon.svg">
+<link rel="preload" href="assets/fonts/Manrope-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  /* Theme before first paint: a saved choice, else a host's choice, else the system setting. */
+  (function () { var d = document.documentElement, t = null; try { t = localStorage.getItem("voclair-theme"); } catch (e) {}
+    d.setAttribute("data-theme", t || d.getAttribute("data-theme") || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    d.classList.add("is-loading");
+    /* Safety net: never leave the preloader up if a script fails to load. */
+    setTimeout(function () { var p = document.getElementById("preloader"); if (p) { p.remove(); d.classList.remove("is-loading"); } }, 12000); })();
+</script>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/voclair.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/engine/voclair-engine-adapter.js" defer></script>
+<script src="assets/js/voice-print.js" defer></script>
+<script src="assets/js/voclair.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+<noscript><style>.vc-preloader { display: none; } html.is-loading body { overflow: auto; }</style></noscript>
+
+
+<!-- PRELOADER:START -->
+<div class="vc-preloader" id="preloader" aria-hidden="true">
+  <div class="vc-preloader-wave"><canvas class="vc-wave" aria-hidden="true"></canvas></div>
+  <div class="vc-preloader-id">
+    <div class="vc-logo"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></div>
+    <p class="tagline">A moment of clarity.</p>
+    <div class="vc-loader"><canvas aria-hidden="true"></canvas><span class="vc-loader-pct">0%</span></div>
+  </div>
+</div>
+<!-- PRELOADER:END -->
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="vc-topbar" data-vc="topbar">
+  <div class="vc-topbar-inner">
+    <a class="vc-logo" href="#top" aria-label="Voclair, back to top"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></a>
+    <nav class="vc-nav" aria-label="Main"><a href="#how">How it works</a><a href="#demo">Demo</a><a href="#next">Coming next</a><a href="#faq">FAQ</a></nav>
+    <button class="vc-theme" type="button" aria-label="Switch theme"><span data-icon="moon" class="vc-i-moon"></span><span data-icon="sun" class="vc-i-sun"></span></button>
+    <a class="vc-btn vc-btn-secondary vc-btn-sm" href="#quote" data-need="">Get a quote</a>
+    <button class="vc-theme vc-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span data-icon="menu"></span></button>
+  </div>
+  <div class="vc-menu" id="mobile-menu" hidden>
+    <nav class="vc-nav" aria-label="Main, mobile"><a href="#how">How it works</a><a href="#demo">Demo</a><a href="#next">Coming next</a><a href="#faq">FAQ</a></nav>
+    <div class="vc-menu-foot"><span class="body-sm">Appearance</span><button class="vc-theme" type="button" aria-label="Switch theme"><span data-icon="moon" class="vc-i-moon"></span><span data-icon="sun" class="vc-i-sun"></span></button></div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. Hero -->
+  <section id="top" class="hero" aria-labelledby="hero-title">
+    <div class="vc-container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Cyber Valley AI Incubator · Batch 9</p>
+        <h1 class="display" id="hero-title">Your voice. Your words. Always.</h1>
+        <p class="lead">Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues. It runs on your own device, and nothing is stored.</p>
+      </div>
+      <div class="hero-player">
+        <div class="vc-player" data-vc="player" data-duration="7.9" id="hero-player">
+          <div class="vc-player-row">
+            <button class="vc-play" type="button" aria-label="Play"><span data-icon="play" class="vc-i-play"></span><span data-icon="pause" class="vc-i-pause"></span></button>
+            <fieldset class="vc-ab"><legend>Version</legend>
+              <input type="radio" name="ab-hero" id="ab-hero-b" value="before" checked><label for="ab-hero-b">Before</label>
+              <input type="radio" name="ab-hero" id="ab-hero-a" value="after"><label for="ab-hero-a">After</label>
+            </fieldset>
+            <span class="vc-time">0:00 / 0:07</span>
+          </div>
+          <p class="vc-hint">Flip the switch while it plays. Drag the wave to jump around.</p>
+          <div class="vc-player-wave"><canvas aria-hidden="true"></canvas></div>
+          <p class="vc-caption">The haze around the voice is echo, reverb and noise.<br>Recorded live at Cyber Valley.<!-- Add once the clip uses the real-time version: <br>Processed exactly as it would be live. --></p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <div class="vc-btn-row">
+          <a class="vc-btn vc-btn-primary" href="#hero-player" id="hero-listen">Hear the difference</a>
+          <a class="vc-btn vc-btn-secondary" href="#quote" data-need="">Get a quote</a>
+        </div>
+        <p class="body-sm">Made for lecture halls, conference venues and live events.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The problem -->
+  <section id="problem" class="vc-section" aria-labelledby="problem-title">
+    <div class="vc-container">
+      <div class="section-head"><h2 class="heading" id="problem-title">The room gets between the speaker and the audience.</h2></div>
+      <div class="vc-cards">
+        <article class="vc-card"><span data-icon="echo"></span><h3 class="subheading">Echo</h3><p>In lecture halls and big meeting rooms, the voice bounces off the walls and comes back.</p></article>
+        <article class="vc-card"><span data-icon="noise"></span><h3 class="subheading">Noise</h3><p>At events and busy venues, chatter, air conditioning and crowd noise bury the voice.</p></article>
+        <article class="vc-card"><span data-icon="reverb"></span><h3 class="subheading">Reverb</h3><p>In large, hard rooms, every word rings on and blurs into the next.</p></article>
+      </div>
+      <p class="lead section-close">Today the fix is better microphones, acoustic treatment of the room, or hours of expert adjustment. Voclair cleans the voice as it is spoken.</p>
+    </div>
+  </section>
+
+  <!-- 3. How it works -->
+  <section id="how" class="vc-section band" aria-labelledby="how-title">
+    <div class="vc-container">
+      <div class="section-head"><h2 class="heading" id="how-title">It sits between the microphone and the speakers.</h2></div>
+      <div class="vc-steps-wrap"><ol class="vc-steps">
+        <li class="vc-step"><span class="vc-step-num"><span data-icon="mic"></span></span><span class="vc-step-k">01</span><h3 class="subheading">Speak.</h3><p>The speaker uses the microphone you already have.</p></li>
+        <li class="vc-step"><span class="vc-step-num"><span class="vc-mark" style="--h:22px" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><span class="vc-step-k">02</span><h3 class="subheading">Clean.</h3><p>Voclair software cleans the voice as it passes through.</p></li>
+        <li class="vc-step"><span class="vc-step-num"><span data-icon="volume-2"></span></span><span class="vc-step-k">03</span><h3 class="subheading">Hear.</h3><p>The clear voice goes to the speakers, the livestream or the recording.</p></li>
+      </ol></div>
+      <div class="vc-cards benefits">
+        <article class="vc-card"><span data-icon="plug"></span><h3 class="subheading">Works with your setup</h3><p>No new microphones or speakers.</p></article>
+        <article class="vc-card"><span data-icon="layers"></span><h3 class="subheading">Echo, reverb and noise in one step</h3><p>One tool, not a chain of fixes.</p></article>
+        <article class="vc-card"><span data-icon="shield-check"></span><h3 class="subheading">Private by design</h3><p>It runs on your own computer, and nothing is stored.</p></article>
+        <!-- Add once measured:
+        <article class="vc-card"><span data-icon="timer"></span><h3 class="subheading">Barely any delay</h3><p>Under [X] ms.</p></article> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Demo -->
+  <section id="demo" class="vc-section" aria-labelledby="demo-title">
+    <div class="vc-container">
+      <div class="section-head">
+        <h2 class="heading" id="demo-title">Hear it with your own audio.</h2>
+        <p class="lead">Upload a recording of someone speaking, or record yourself, and hear the difference.</p>
+        <p class="body-sm">Your audio is cleaned in this browser tab. Nothing is uploaded or stored.</p>
+      </div>
+
+      <div class="demo" id="demo-app" data-stage="idle">
+        <div class="demo-options">
+          <!-- Upload: cleaned in the browser by assets/js/engine/ (see config.js). -->
+          <label class="demo-opt demo-opt-drop" id="demo-drop" for="demo-file">
+            <input class="vc-sr" type="file" id="demo-file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.oga,.opus,.flac,.webm">
+            <span class="demo-opt-icon demo-icon-upload"><span data-icon="upload"></span></span>
+            <span class="demo-opt-text">
+              <span class="demo-opt-title">Upload a file</span>
+              <span class="demo-opt-note">Drop in a recording of someone speaking, or click to choose one. MP3, WAV, M4A, OGG or FLAC, up to 5&nbsp;MB and 3 minutes. It is cleaned on your device and never uploaded.</span>
+            </span>
+            <span class="demo-opt-wave" aria-hidden="true"><canvas data-vc="wave" data-state="before" data-seed="2.1"></canvas><canvas class="demo-wave-clean" data-vc="wave" data-state="after" data-seed="2.1"></canvas></span>
+            <span class="demo-opt-live"></span>
+          </label>
+
+          <!-- Record: 10 s from the microphone, then cleaned the same way as an upload (demo.js). -->
+          <button class="demo-opt" type="button" id="demo-record">
+            <span class="demo-opt-icon demo-icon-mic"><span data-icon="mic"></span></span>
+            <span class="demo-opt-text">
+              <span class="demo-opt-title">Record yourself</span>
+              <span class="demo-opt-note">Speak for up to 10 seconds. Stay quiet for the first half second so Voclair can hear the room. The browser asks for the microphone only when you click.</span>
+            </span>
+            <span class="demo-recorder" id="demo-recording" hidden>
+              <span class="demo-count" id="demo-count">0:10</span>
+              <span class="demo-level" id="demo-level" aria-hidden="true"><i></i></span>
+              <span class="vc-status" data-live>Recording. Click again to stop early.</span>
+            </span>
+            <span class="demo-opt-action"><span class="demo-action-label">Start recording</span><span data-icon="arrow-right" class="demo-arrow"></span><span data-icon="square" class="demo-stop-icon"></span></span>
+            <span class="demo-opt-live"></span>
+          </button>
+
+        </div>
+
+        <!-- Moved by demo.js into the card that started the work -->
+        <span class="demo-progress" id="demo-progress" role="status" hidden>
+          <span class="vc-status" data-live id="demo-stage-text">Reading the recording…</span>
+          <span class="demo-bar" aria-hidden="true"></span>
+          <span class="body-sm" id="demo-typical" hidden></span>
+        </span>
+        <span class="demo-done" id="demo-done" hidden><span data-icon="check"></span>Cleaned. Listen below.</span>
+
+        <p class="vc-error demo-error" id="demo-error" role="alert" hidden><span data-icon="circle-alert"></span><span id="demo-error-text"></span></p>
+
+        <div class="demo-results" id="demo-results" hidden>
+          <div class="vc-player" data-vc="player" data-duration="10" id="demo-player">
+            <div class="vc-player-row">
+              <button class="vc-play" type="button" aria-label="Play"><span data-icon="play" class="vc-i-play"></span><span data-icon="pause" class="vc-i-pause"></span></button>
+              <fieldset class="vc-ab"><legend>Version</legend>
+                <input type="radio" name="ab-demo" id="ab-demo-b" value="before" checked><label for="ab-demo-b">Before</label>
+                <input type="radio" name="ab-demo" id="ab-demo-a" value="after"><label for="ab-demo-a">After</label>
+              </fieldset>
+              <span class="vc-time">0:00 / 0:10</span>
+            </div>
+            <p class="vc-hint">Flip the switch while it plays. Drag the wave to jump around.</p>
+            <div class="vc-player-wave"><canvas aria-hidden="true"></canvas></div>
+            <p class="vc-caption" id="demo-caption">Your recording, before and after.<!-- Add once the demo uses the real-time version: <br>Processed exactly as it would be live. --></p>
+          </div>
+          <p class="vc-note demo-stub" id="demo-stub" hidden><span data-icon="info"></span><span>Preview build: the cleaning model is not connected yet, so After plays the original recording.</span></p>
+          <div class="vc-btn-row">
+            <a class="vc-btn vc-btn-primary" id="demo-download" href="#" download="voclair-clean"><span data-icon="download"></span>Download the clean version</a>
+          </div>
+
+          <details class="demo-details" id="demo-details">
+            <summary><span>Show details</span><span data-icon="chevron-down"></span></summary>
+            <div class="spectro-grid">
+              <figure><canvas class="spectro" id="spectro-before" aria-hidden="true"></canvas><figcaption class="vc-caption">Before: spectrogram (time left to right, pitch bottom to top)</figcaption></figure>
+              <figure><canvas class="spectro" id="spectro-after" aria-hidden="true"></canvas><figcaption class="vc-caption">After: spectrogram</figcaption></figure>
+            </div>
+          </details>
+
+          <details class="demo-details" id="demo-transcript">
+            <summary><span>Preview: clearer audio, clearer transcripts (coming next)</span><span data-icon="chevron-down"></span></summary>
+            <div class="transcript" id="transcript-body">
+              <p class="vc-status" data-live id="transcript-status" hidden>Transcribing both versions…</p>
+            </div>
+          </details>
+
+          <div class="demo-close">
+            <p class="lead">To use Voclair in a venue, describe it in the quote form and Voclair will reply with a price.</p>
+            <a class="vc-btn vc-btn-secondary" href="#quote" data-need="live">Get a quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Coming next -->
+  <section id="next" class="vc-section band" aria-labelledby="next-title">
+    <div class="vc-container">
+      <div class="section-head"><h2 class="heading" id="next-title">Coming next</h2></div>
+      <ul class="next-list">
+        <li><h3 class="subheading">Live captions and summaries</h3><span class="code">VoclairVAI</span><p>Captions on screen as people speak, plus a summary afterwards.</p></li>
+        <li><h3 class="subheading">Better transcripts</h3><span class="code">VoclairASR</span><p>Clearer audio for speech recognition and voice assistants.</p></li>
+        <li><h3 class="subheading">Developer access</h3><span class="code">API</span><p>Connect Voclair to your own software.</p></li>
+      </ul>
+      <div class="next-close">
+        <p class="lead">For early access, choose the product in the form below.</p>
+        <a class="vc-btn vc-btn-primary" href="#quote" data-need="early">Get early access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Team -->
+  <section id="team" class="vc-section" aria-labelledby="team-title">
+    <div class="vc-container">
+      <div class="section-head">
+        <h2 class="heading" id="team-title">The team behind Voclair</h2>
+        <p class="lead">Voclair began at a talk where the room swallowed the speaker's voice. Its founders set out to fix that.</p>
+      </div>
+      <div class="vc-cards team-grid">
+        <article class="vc-team">
+          <div class="vc-team-photo" role="img" aria-label="Photo of Rustom">R</div>
+          <h3 class="subheading">Rustom</h3>
+          <ul><li>Speech enhancement and test-time adaptation research, University of Stuttgart</li><li>Speech recognition (ASR) models built from scratch</li><li>Live mixing on digital desks</li></ul>
+        </article>
+        <article class="vc-team">
+          <div class="vc-team-photo" role="img" aria-label="Photo of Deepam">D</div>
+          <h3 class="subheading">Deepam</h3>
+          <ul><li>UI/UX, branding and strategy</li></ul>
+        </article>
+        <article class="vc-team">
+          <div class="vc-team-photo" role="img" aria-label="Photo of Mehryar">M</div>
+          <h3 class="subheading">Mehryar</h3>
+          <ul><li>Natural language processing</li><li>Automatic speech recognition</li><li>Local, private AI deployment</li></ul>
+        </article>
+      </div>
+      <p class="body-sm team-foot">Cyber Valley AI Incubator, Batch 9</p>
+    </div>
+  </section>
+
+  <!-- 7. FAQ (only questions with confirmed answers) -->
+  <section id="faq" class="vc-section band" aria-labelledby="faq-title">
+    <div class="vc-container faq-grid">
+      <div class="section-head"><h2 class="heading" id="faq-title">Questions and answers</h2></div>
+      <div class="vc-accordion">
+        <details><summary>Is my audio stored?<span data-icon="chevron-down"></span></summary><div class="vc-answer"><p>No. Voclair runs on your own device, and nothing is kept.</p></div></details>
+        <details><summary>Do I need new equipment?<span data-icon="chevron-down"></span></summary><div class="vc-answer"><p>No. Voclair is software. It works with the microphones and speakers you already have.</p></div></details>
+        <!-- Add when answered: What does it run on? · What if it fails during a talk? · Does it work with music? · How much delay does it add? -->
+        <details><summary>Is live mode ready?<span data-icon="chevron-down"></span></summary><div class="vc-answer"><p>Live mode is in testing. The result can be heard on a recording today.</p></div></details>
+        <details><summary>How much does it cost?<span data-icon="chevron-down"></span></summary><div class="vc-answer"><p>Pricing depends on the venue and how Voclair is used. Request a quote, and Voclair will reply by email.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Get a quote -->
+  <section id="quote" class="vc-section" aria-labelledby="quote-title">
+    <div class="vc-container quote-grid">
+      <div class="section-head">
+        <h2 class="heading" id="quote-title">Request a quote</h2>
+        <p class="lead" id="quote-sub">Two questions and an email address. Voclair replies by email and never shares the address.</p>
+      </div>
+      <div id="quote-slot">
+        <form class="vc-form" id="quote-form" novalidate>
+          <div class="vc-field">
+            <label class="vc-label" for="q-email">Email</label>
+            <input class="vc-input" id="q-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="q-email-note" placeholder="name@venue.com">
+            <p class="vc-error" id="q-email-err" hidden><span data-icon="circle-alert"></span><span>Enter an email address like name@venue.com.</span></p>
+            <p class="vc-note" id="q-email-note"><span data-icon="lock"></span>Voclair uses this address only to reply and never shares it.</p>
+          </div>
+
+          <fieldset class="vc-choices" id="q-need">
+            <legend>What do you need?</legend>
+            <label class="vc-choice"><input class="vc-radio" type="radio" name="need" id="q-need-live" value="live"><span>Live sound for talks or events<small>VoclairASE</small></span></label>
+            <label class="vc-choice"><input class="vc-radio" type="radio" name="need" id="q-need-early" value="early"><span>Early access to upcoming products</span></label>
+            <div class="vc-subchoices" id="q-early" hidden>
+              <label class="vc-checkline"><input class="vc-check" type="checkbox" name="early" id="q-early-vai" value="captions"><span>Live captions and summaries</span></label>
+              <label class="vc-checkline"><input class="vc-check" type="checkbox" name="early" id="q-early-asr" value="transcripts"><span>Better transcripts</span></label>
+              <label class="vc-checkline"><input class="vc-check" type="checkbox" name="early" id="q-early-api" value="api"><span>Developer access</span></label>
+              <label class="vc-checkline"><input class="vc-check" type="checkbox" name="notify" id="q-notify" value="yes"><span>Email me when it is available</span></label>
+            </div>
+            <label class="vc-choice"><input class="vc-radio" type="radio" name="need" id="q-need-unsure" value="unsure"><span>Not sure</span></label>
+          </fieldset>
+
+          <div class="vc-field">
+            <label class="vc-label" for="q-more">Anything else? <span class="vc-opt">(optional)</span></label>
+            <textarea class="vc-input" id="q-more" name="more" rows="4" placeholder="e.g. the venue, room size, or how often you run events"></textarea>
+          </div>
+
+          <div class="vc-hp" aria-hidden="true"><label for="q-website">Website</label><input id="q-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+
+          <p class="vc-error" id="q-send-err" role="alert" hidden><span data-icon="circle-alert"></span><span>The message could not be sent. Check the connection and try again.</span></p>
+          <div class="quote-submit">
+            <button class="vc-btn vc-btn-primary" type="submit" id="q-send">Send</button>
+            <p class="body-sm">Voclair stores your email and message only to reply to you. Read the <a class="vc-link" href="privacy.html">privacy policy</a>.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="vc-footer">
+  <div class="vc-container">
+    <div class="vc-footer-grid">
+      <div>
+        <a class="vc-logo" href="#top"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></a>
+        <p class="footer-line">Voclair: every seat hears every word.</p>
+        <p>Cyber Valley AI Incubator, Batch 9</p>
+      </div>
+      <div><h2>Product</h2><ul><li><a href="#how">How it works</a></li><li><a href="#demo">Demo</a></li><li><a href="#next">Coming next</a></li><li><a href="#faq">FAQ</a></li><li><a href="#quote" data-need="">Get a quote</a></li></ul></div>
+      <div><h2>Contact</h2><ul id="footer-contact"><li><a href="#quote" data-need="">Request a quote</a></li></ul></div>
+    </div>
+    <div class="vc-footer-base"><span>© 2026 Voclair</span><span><a href="impressum.html">Impressum</a> · <a href="privacy.html">Privacy policy</a></span></div>
+  </div>
+</footer>
+
+</body></html>

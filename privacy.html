@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy policy · Voclair</title>
+<meta name="description" content="Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues. It runs on your own device, and nothing is stored.">
+<meta property="og:title" content="Voclair: every seat hears every word">
+<meta property="og:description" content="Voclair removes echo, reverb and noise from the microphone as people speak, in lecture halls and live venues.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f8f8f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c110e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/voclair-app-icon.svg">
+<link rel="preload" href="assets/fonts/Manrope-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  /* Theme before first paint: a saved choice, else a host's choice, else the system setting. */
+  (function () { var d = document.documentElement, t = null; try { t = localStorage.getItem("voclair-theme"); } catch (e) {}
+    d.setAttribute("data-theme", t || d.getAttribute("data-theme") || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+})();
+</script>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/voclair.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/voclair.js" defer></script>
+<script>document.addEventListener("DOMContentLoaded", function () { Voclair.theme.init(); Voclair.init(); });</script>
+</head>
+<body class="vc-page">
+<header class="vc-topbar">
+  <div class="vc-topbar-inner">
+    <a class="vc-logo" href="index.html" aria-label="Voclair, home"><span class="vc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Voclair</span></a>
+    <button class="vc-theme" type="button" data-vc="theme" aria-label="Switch theme"><span data-icon="moon" class="vc-i-moon"></span><span data-icon="sun" class="vc-i-sun"></span></button>
+  </div>
+</header>
+<main class="plain"><div class="vc-container">
+<div class="section-head"><h1 class="heading">Privacy policy</h1><p class="lead">This policy is being prepared and will be published before launch.</p></div>
+<!-- TO COMPLETE BEFORE LAUNCH (GDPR Art. 13): controller and contact; what the quote form collects (email, answers, message), why, legal basis, how long it is kept;
+     the "Email me when it is available" opt-in; hosting provider and server logs; the demo (where audio is processed and whether anything is stored);
+     the transcript preview and any third-party service; visitors' rights and the supervisory authority (LfDI Baden-Württemberg).
+     This site loads no fonts, scripts or trackers from third parties. Have the final text checked with the incubator's legal contact. -->
+<h2>Controller</h2><p>[Name and address as in the Impressum]</p>
+<h2>What this site collects</h2><p>[Quote form, demo, server logs]</p>
+<h2>Your rights</h2><p>[Access, correction, deletion, objection, complaint to the supervisory authority]</p>
+</div></main>
+<footer class="vc-footer"><div class="vc-container"><div class="vc-footer-base" style="border:0;margin:0;padding:0"><span>© 2026 Voclair</span><span><a href="impressum.html">Impressum</a> · <a href="privacy.html">Privacy policy</a></span></div></div></footer>
+</body>
+</html>
